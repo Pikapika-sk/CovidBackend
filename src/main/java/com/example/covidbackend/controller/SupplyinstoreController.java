@@ -3,6 +3,7 @@ package com.example.covidbackend.controller;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.example.covidbackend.Util.UniqueID;
 import com.example.covidbackend.entity.Supplyinstore;
 import com.example.covidbackend.service.SupplyinstoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,7 @@ public class SupplyinstoreController {
 
     @PostMapping("/register")
     public boolean register(@RequestBody Supplyinstore supplyInStore) {
-        Date now = DateUtil.date();
-        String date = DateUtil.format(now, "yyyyMMddHHmmss");
-        String randomString = RandomUtil.randomNumbers(8);
-        String tmp = date + randomString;
+        String tmp = new UniqueID().getTheUniqueId();
         supplyInStore.setId(tmp);
         return supplyService.save(supplyInStore);
     }

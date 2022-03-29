@@ -53,4 +53,22 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     }
 
+    public User getUserSet(String phoneNumber) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone_number", phoneNumber);
+        User one = getOne(queryWrapper);
+        if (one != null)
+            return one;
+        else return null;
+            
+    }
+
+    public User getTheSetUser(String phoneNumber) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone_number",phoneNumber);
+        User one = getOne(queryWrapper);
+        return one;
+    }
+
+
 }

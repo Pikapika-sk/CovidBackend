@@ -16,12 +16,14 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
     @PostMapping("/login")
-    public boolean login(@RequestBody UserDTO userDTO){
+    public boolean login(@RequestBody UserDTO userDTO) {
         return userService.login(userDTO);
     }
+
     @PostMapping("/register")
-    public boolean register(@RequestBody UserDTO userDTO){
+    public boolean register(@RequestBody UserDTO userDTO) {
         return userService.register(userDTO);
     }
 
@@ -37,8 +39,13 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/{phoneNumber}")
+    public User getUserOfSetting(@PathVariable String phoneNumber) {
+        return userService.getTheSetUser(phoneNumber);
+    }
+
     @DeleteMapping("/{id}")
-    public boolean remove(@PathVariable Integer id){
+    public boolean remove(@PathVariable Integer id) {
         return userService.removeById(id);
     }
 }
