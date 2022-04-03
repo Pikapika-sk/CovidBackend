@@ -38,4 +38,14 @@ public class SupplystockController {
         supplystock.setId(tmp);
         return supplystockService.save(supplystock);
     }
+
+    @GetMapping("/{categoryname}")
+    public List<Supplystock> getSupply(@PathVariable String categoryname) {
+        return supplystockService.getofCategory(categoryname);
+    }
+
+    @PostMapping("/outStore")
+    public boolean outFromStroe(@RequestBody Supplystock supplystock) {
+        return supplystockService.updateById(supplystock);
+    }
 }

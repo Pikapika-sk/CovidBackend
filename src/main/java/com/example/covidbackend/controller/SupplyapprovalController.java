@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -55,8 +56,15 @@ public class SupplyapprovalController {
         supplyapproval.setQuantity(supplyApprovalDTO.getQuantity());
         supplyapproval.setCategoryname(supplyApprovalDTO.getCategoryname());
         supplyapproval.setReason(supplyApprovalDTO.getReason());
+        supplyapproval.setCreateTime(new Date());
         supplyapproval.setState(1);
         supplyapproval.setWeight(1);
+        supplyapproval.setNeedQuantity(supplyApprovalDTO.getQuantity());
         return supplyapprovalService.save(supplyapproval);
+    }
+    @PostMapping("/updateofdis")
+    public boolean updateOfDis(@RequestBody  Supplyapproval supplyapproval ){
+        if(supplyapproval.getNeedQuantity() == 0)supplyapproval.setOutState(true);
+        return supplyapprovalService.updateById(supplyapproval);
     }
 }

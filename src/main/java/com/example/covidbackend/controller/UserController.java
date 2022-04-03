@@ -27,10 +27,14 @@ public class UserController {
         return userService.register(userDTO);
     }
 
-
     @PostMapping
     public boolean save(@RequestBody User user) { //User对象从接口传过来
         return userService.saveUser(user);
+    }
+
+    @PostMapping("/isadmin")
+    public boolean isadmin(@RequestBody User user){
+        return userService.judgeIsAdmin(user);
     }
 
     @GetMapping
@@ -42,6 +46,10 @@ public class UserController {
     @GetMapping("/{phoneNumber}")
     public User getUserOfSetting(@PathVariable String phoneNumber) {
         return userService.getTheSetUser(phoneNumber);
+    }
+    @GetMapping("getAddress/{phoneNumber}")
+    public User getAddress (@PathVariable String phoneNumber){
+        return userService.getAddress(phoneNumber);
     }
 
     @DeleteMapping("/{id}")

@@ -6,10 +6,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.covidbackend.controller.DTO.UserDTO;
 import com.example.covidbackend.entity.User;
 import com.example.covidbackend.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
@@ -17,10 +16,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     public boolean saveUser(User user) {
         return saveOrUpdate(user);
     }
-
-
     public boolean login(UserDTO userDTO) {
-
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", userDTO.getUsername());
         queryWrapper.eq("phone_number", userDTO.getPhoneNumber());//这里的column要跟数据库的列一样
@@ -34,13 +30,10 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         }
     }
 
-
     public boolean register(UserDTO userDTO) {
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", userDTO.getUsername());
         queryWrapper.eq("phone_number", userDTO.getPhoneNumber());
-
         User one = getOne(queryWrapper);
         if (one == null) {
             one = new User();
@@ -53,16 +46,6 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     }
 
-    public User getUserSet(String phoneNumber) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone_number", phoneNumber);
-        User one = getOne(queryWrapper);
-        if (one != null)
-            return one;
-        else return null;
-            
-    }
-
     public User getTheSetUser(String phoneNumber) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone_number",phoneNumber);
@@ -70,5 +53,18 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         return one;
     }
 
+    public User getAddress(String phoneNumber) {
+        QueryWrapper<User>queryWrapper =new QueryWrapper<>();
+        queryWrapper.eq("phone_number",phoneNumber);
+        User one = getOne(queryWrapper);
+        return one;
+    }
 
+    public boolean judgeIsAdmin(User user) {
+        QueryWrapper<User>  wrapper= new QueryWrapper<>();
+        wrapper.eq("phone_number",user.getPhoneNumber());
+        User one = getOne(wrapper);
+        return one.getIsadmin();
+
+    }
 }

@@ -10,16 +10,16 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Supplyapproval {
+public class Supplyadminapply {
     private String id;
+    private String address;
     private String categoryname;
     private Double quantity;
-    private String reason;
     private Integer weight;
-    private Integer state;
-    private String phoneNumber;
+    private Boolean outState;
+    private String note;
+    private String username;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
-    private Boolean outState;
     private Double needQuantity;
 }
