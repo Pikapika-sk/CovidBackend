@@ -56,4 +56,10 @@ public class UserController {
     public boolean remove(@PathVariable Integer id) {
         return userService.removeById(id);
     }
+
+    @GetMapping("/sum")
+    public  Integer getTheNumberOfUser(){
+        List<User> users = userService.list();
+        return users.size();
+    }
 }

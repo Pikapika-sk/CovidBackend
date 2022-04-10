@@ -21,7 +21,8 @@ public class SupplyapprovalController {
     public List<Supplyapproval> getAll(){
         return supplyapprovalService.list();
     }
-
+    @GetMapping("/getstate3")
+    public List<Supplyapproval>getstate3(){return  supplyapprovalService.getstate3();}
     @PostMapping("/weight")
     public boolean editWeight(@RequestBody Supplyapproval newWeight){
         return supplyapprovalService.updateById(newWeight);
@@ -60,11 +61,17 @@ public class SupplyapprovalController {
         supplyapproval.setState(1);
         supplyapproval.setWeight(1);
         supplyapproval.setNeedQuantity(supplyApprovalDTO.getQuantity());
+
         return supplyapprovalService.save(supplyapproval);
     }
     @PostMapping("/updateofdis")
     public boolean updateOfDis(@RequestBody  Supplyapproval supplyapproval ){
         if(supplyapproval.getNeedQuantity() == 0)supplyapproval.setOutState(true);
         return supplyapprovalService.updateById(supplyapproval);
+    }
+
+    @GetMapping("/unFinishedSum")
+    public String getunFinishedSum(){
+        return supplyapprovalService.getunFinishedSum();
     }
 }

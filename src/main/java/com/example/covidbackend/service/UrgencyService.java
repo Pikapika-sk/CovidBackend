@@ -7,7 +7,9 @@ import com.example.covidbackend.entity.Urgency;
 import com.example.covidbackend.mapper.UrgencyMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -24,5 +26,13 @@ public class UrgencyService extends ServiceImpl<UrgencyMapper, Urgency> {
         Date date = new Date();
         urgency.setCreateTime(date);
         return save(urgency);
+    }
+
+    public Integer getTheSum() {
+        QueryWrapper<Urgency> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("state",0);
+        List<Urgency> urgencies = getBaseMapper().selectList(queryWrapper);
+        return urgencies.size();
+
     }
 }

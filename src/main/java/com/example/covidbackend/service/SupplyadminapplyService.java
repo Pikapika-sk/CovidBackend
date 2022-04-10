@@ -23,6 +23,7 @@ public class SupplyadminapplyService extends ServiceImpl<SupplyadminapplyMapper,
         saveapply.setUsername(supplyadminapply.getUsername());
         saveapply.setWeight(supplyadminapply.getWeight());
         saveapply.setCreateTime(new Date());
+        saveapply.setNeedQuantity(saveapply.getQuantity());
         return save(saveapply);
 
     }

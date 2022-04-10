@@ -22,6 +22,9 @@ public class SupplyinstoreController {
     @PostMapping("/register")
     public boolean register(@RequestBody Supplyinstore supplyInStore) {
         String tmp = new UniqueID().getTheUniqueId();
+        if (supplyInStore.getCategoryname() == null || supplyInStore.getSupplyname() == null || supplyInStore.getQuantity() <= 0)
+            return false;
+        if (supplyInStore.getNote() == "") supplyInStore.setNote("无");
         supplyInStore.setId(tmp);
         return supplyService.save(supplyInStore);
     }
@@ -35,6 +38,19 @@ public class SupplyinstoreController {
     @DeleteMapping("{id}")
     public boolean remove(@PathVariable String id) {
         return supplyService.removeById(id);
+    }
+
+    @GetMapping ("/getPurpledata")
+    public List<Long> getPurpleData(){
+        return supplyService.getPurpledata();
+    }
+    @GetMapping ("/getBluedata")
+    public List<Long> getBlueData(){
+        return supplyService.getBluedata();
+    }
+    @GetMapping ("/getSevenDaySum")
+    public String getSevenDaySum(){
+        return supplyService.getSevenDaySum();
     }
 
 }

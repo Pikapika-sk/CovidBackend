@@ -25,4 +25,13 @@ public class SupplystockService extends ServiceImpl<SupplystockMapper, Supplysto
         return list;
 
     }
+
+    public Integer getsum() {
+        List<Supplystock> lists =  list();
+        int sum = 0;
+        for( Supplystock supplystock :lists){
+            sum += supplystock.getRemainQuantity();
+        }
+        return sum;
+    }
 }

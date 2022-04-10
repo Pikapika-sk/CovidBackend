@@ -36,6 +36,7 @@ public class SupplystockController {
         String randomString = RandomUtil.randomNumbers(8);
         String tmp = date + randomString;
         supplystock.setId(tmp);
+        if(supplystock.getNote()==null||supplystock.getNote()=="") supplystock.setNote("无");
         return supplystockService.save(supplystock);
     }
 
@@ -47,5 +48,9 @@ public class SupplystockController {
     @PostMapping("/outStore")
     public boolean outFromStroe(@RequestBody Supplystock supplystock) {
         return supplystockService.updateById(supplystock);
+    }
+    @GetMapping("/getsum")
+    public Integer getSum(){
+        return supplystockService.getsum();
     }
 }

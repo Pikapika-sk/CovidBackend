@@ -28,4 +28,8 @@ public class SupplyoutstoreController {
     public List<Supplyoutstore> getall(){
         return supplyoutstoreService.list();
     }
+    @GetMapping("/outsum")
+    public Integer getOutSum(){
+        return supplyoutstoreService.getOutSum();
+    }
 }

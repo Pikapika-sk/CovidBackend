@@ -39,5 +39,8 @@ public class UrgencyController {
     public boolean changestate(@RequestBody Urgency urgency){
         return urgencyService.saveOrUpdate(urgency);
     }
-
+    @GetMapping("/sum")
+    public Integer getThesum(){
+        return urgencyService.getTheSum();
+    }
 }

@@ -17,7 +17,7 @@ public class SupplyadminapplyController {
 
     @PostMapping("/set")
     public boolean adminApplySet(@RequestBody Supplyadminapply supplyadminapply){
-        supplyadminapply.setNeedQuantity(supplyadminapply.getQuantity());
+
         return supplyadminapplyService.saveTheApply(supplyadminapply);
 
     }

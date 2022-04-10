@@ -25,4 +25,19 @@ public class SupplyapprovalService extends ServiceImpl<SupplyapprovalMapper, Sup
         List<Supplyapproval> supplyapprovals = supplyapprovalMapper.selectList(wrapper);
         return supplyapprovals;
     }
+
+    public String getunFinishedSum() {
+        QueryWrapper<Supplyapproval>wrapper =new QueryWrapper<>();
+        wrapper.eq("state",1);
+        List<Supplyapproval>supplyapprovals = supplyapprovalMapper.selectList(wrapper);
+        Integer sum = supplyapprovals.size();
+        return sum.toString();
+    }
+
+    public List<Supplyapproval> getstate3() {
+        QueryWrapper<Supplyapproval>wrapper = new QueryWrapper<>();
+        wrapper.eq("state",3);
+        List<Supplyapproval>supplyapprovals = supplyapprovalMapper.selectList(wrapper);
+        return supplyapprovals;
+    }
 }

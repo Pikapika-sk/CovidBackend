@@ -17,4 +17,6 @@ public class Supplyoutstore {
     private Date outTime;
     private String supplyname;
     private Double outQuantity;
+    private String address;
+    private String phoneNumber;
 }
