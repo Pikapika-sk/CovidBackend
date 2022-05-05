@@ -32,4 +32,12 @@ public class SupplyoutstoreController {
     public Integer getOutSum(){
         return supplyoutstoreService.getOutSum();
     }
+    @GetMapping ("/getPurpledata")
+    public List<Long> getPurpleData(){
+        return supplyoutstoreService.getPurpledata();
+    }
+    @GetMapping ("/getSevenDaySum")
+    public String getSevenDaySum(){
+        return supplyoutstoreService.getSevenDaySum();
+    }
 }

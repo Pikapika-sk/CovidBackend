@@ -40,15 +40,12 @@ public class SupplycategoryService extends ServiceImpl<SupplycategoryMapper, Sup
         QueryWrapper<Supplycategory> wrapper = new QueryWrapper<>();
         wrapper.select("categoryname");
         List<Map<String, Object>> maps = supplycategoryMapper.selectMaps(wrapper);
-
         List<String> ans = new ArrayList<>();
         for (Map<String, Object> m : maps) {
             for (String k : m.keySet()) {
                 ans.add((String) m.get(k));
-
             }
         }
         return ans;
-
     }
 }

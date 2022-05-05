@@ -5,7 +5,6 @@ import com.example.covidbackend.entity.Urgency;
 import com.example.covidbackend.service.UrgencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -42,5 +41,9 @@ public class UrgencyController {
     @GetMapping("/sum")
     public Integer getThesum(){
         return urgencyService.getTheSum();
+    }
+    @GetMapping("/getallnofinish")
+    public List<Urgency> getallno(){
+        return urgencyService.getalllno();
     }
 }

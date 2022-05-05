@@ -19,7 +19,6 @@ public class SupplyapprovalService extends ServiceImpl<SupplyapprovalMapper, Sup
     @Autowired
     private SupplyapprovalMapper supplyapprovalMapper;
     public List<Supplyapproval> getself(String phoneNumber) {
-
         QueryWrapper<Supplyapproval>wrapper = new QueryWrapper<>();
         wrapper.eq("phone_number",phoneNumber);
         List<Supplyapproval> supplyapprovals = supplyapprovalMapper.selectList(wrapper);

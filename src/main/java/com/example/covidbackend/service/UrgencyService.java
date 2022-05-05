@@ -7,7 +7,6 @@ import com.example.covidbackend.entity.Urgency;
 import com.example.covidbackend.mapper.UrgencyMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,5 +33,12 @@ public class UrgencyService extends ServiceImpl<UrgencyMapper, Urgency> {
         List<Urgency> urgencies = getBaseMapper().selectList(queryWrapper);
         return urgencies.size();
 
+    }
+
+    public List<Urgency> getalllno() {
+        QueryWrapper<Urgency> wrapper = new QueryWrapper<>();
+        wrapper.eq("state",0);
+        List<Urgency> urgencies = getBaseMapper().selectList(wrapper );
+        return urgencies;
     }
 }

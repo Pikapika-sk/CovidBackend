@@ -2,7 +2,6 @@ package com.example.covidbackend.controller;
 
 
 import com.example.covidbackend.entity.Supplycategory;
-import com.example.covidbackend.mapper.SupplycategoryMapper;
 import com.example.covidbackend.service.SupplycategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

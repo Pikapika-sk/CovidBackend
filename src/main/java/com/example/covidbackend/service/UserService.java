@@ -14,8 +14,17 @@ import org.springframework.stereotype.Service;
 public class UserService extends ServiceImpl<UserMapper, User> {
 
     public boolean saveUser(User user) {
+
         return saveOrUpdate(user);
     }
+    public boolean addNewUser(User user){
+        QueryWrapper<User> queryWrapper= new QueryWrapper<>();
+        queryWrapper.eq("phone_number",user.getPhoneNumber());
+        User one  = getOne(queryWrapper);
+        if(one !=null)return false;
+        else return save(user);
+    }
+
     public boolean login(UserDTO userDTO) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", userDTO.getUsername());
@@ -65,6 +74,5 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         wrapper.eq("phone_number",user.getPhoneNumber());
         User one = getOne(wrapper);
         return one.getIsadmin();
-
     }
 }

@@ -2,9 +2,7 @@ package com.example.covidbackend.controller;
 
 import com.example.covidbackend.controller.DTO.UserDTO;
 import com.example.covidbackend.entity.User;
-import com.example.covidbackend.mapper.UserMapper;
 import com.example.covidbackend.service.UserService;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +26,8 @@ public class UserController {
     }
 
     @PostMapping
-    public boolean save(@RequestBody User user) { //User对象从接口传过来
+    public boolean save(@RequestBody User user) {
+        if(user.getPeopleNumber()<0)return false;
         return userService.saveUser(user);
     }
 
@@ -42,7 +41,10 @@ public class UserController {
         List<User> user = userService.list();
         return user;
     }
-
+    @PostMapping("/add")
+    public boolean addUser(@RequestBody User user){
+        return  userService.addNewUser(user);
+    }
     @GetMapping("/{phoneNumber}")
     public User getUserOfSetting(@PathVariable String phoneNumber) {
         return userService.getTheSetUser(phoneNumber);
@@ -52,9 +54,9 @@ public class UserController {
         return userService.getAddress(phoneNumber);
     }
 
-    @DeleteMapping("/{id}")
-    public boolean remove(@PathVariable Integer id) {
-        return userService.removeById(id);
+    @DeleteMapping("/{phoneNumber}")
+    public boolean remove(@PathVariable String phoneNumber) {
+        return userService.removeById(phoneNumber);
     }
 
     @GetMapping("/sum")

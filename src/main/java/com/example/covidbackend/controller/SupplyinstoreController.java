@@ -1,15 +1,12 @@
 package com.example.covidbackend.controller;
 
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.example.covidbackend.Util.UniqueID;
 import com.example.covidbackend.entity.Supplyinstore;
 import com.example.covidbackend.service.SupplyinstoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,6 +23,7 @@ public class SupplyinstoreController {
             return false;
         if (supplyInStore.getNote() == "") supplyInStore.setNote("无");
         supplyInStore.setId(tmp);
+
         return supplyService.save(supplyInStore);
     }
 

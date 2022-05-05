@@ -40,7 +40,7 @@ public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Suppl
         Date today = DateUtil.parse(tmptoday.toString());
         Double sum = 0.0;
         QueryWrapper<Supplyinstore> wrapper = new QueryWrapper<>();
-        Date nowdaybeforeseven = DateUtil.beginOfDay(DateUtil.offsetDay(today, -7));
+        Date nowdaybeforeseven = DateUtil.beginOfDay(DateUtil.offsetDay(today, -6));
         wrapper.lt("in_store_time", DateUtil.endOfDay(today));
         wrapper.ge("in_store_time", DateUtil.beginOfDay(nowdaybeforeseven));
         List<Supplyinstore> supplyinstores = getBaseMapper().selectList(wrapper);
