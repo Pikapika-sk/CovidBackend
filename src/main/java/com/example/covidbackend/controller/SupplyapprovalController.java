@@ -18,7 +18,7 @@ public class SupplyapprovalController {
 
     @GetMapping
     public List<Supplyapproval> getAll() {
-        return supplyapprovalService.list();
+        return supplyapprovalService.getAllByOrder();
     }
 
     @GetMapping("/getstate3")

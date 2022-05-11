@@ -75,4 +75,10 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         User one = getOne(wrapper);
         return one.getIsadmin();
     }
+
+    public boolean changeState(String phoneNumber) {
+        User user  = getById(phoneNumber);
+        user.setIsadmin(!user.getIsadmin());
+        return updateById(user);
+    }
 }

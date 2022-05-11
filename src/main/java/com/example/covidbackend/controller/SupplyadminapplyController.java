@@ -28,7 +28,7 @@ public class SupplyadminapplyController {
     }
     @GetMapping("/getAll")
     public List<Supplyadminapply> getAll(){
-        return supplyadminapplyService.list();
+        return supplyadminapplyService.getListByOrder();
     }
 
 }

@@ -26,11 +26,10 @@ public class SupplycategoryController {
 
     @GetMapping
     public List<Supplycategory> get() {
-        List<Supplycategory> supplycategories = supplycategoryService.list();
-        return supplycategories;
+        return supplycategoryService.getByAllByTime();//        根据时间降序返回category列表
     }
     @GetMapping("/category")
-    public List<String> getcateogry() {
+    public List<String> getcateogry() {      //select中的category数据
         List<String> supplycategories = supplycategoryService.getcategory();
         return supplycategories;
     }

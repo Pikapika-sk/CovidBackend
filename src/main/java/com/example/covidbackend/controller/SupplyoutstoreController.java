@@ -19,14 +19,15 @@ public class SupplyoutstoreController {
 
     @PostMapping("/save")
     public boolean saveOfOutStore(@RequestBody Supplyoutstore supplyoutstore) {
+        if(supplyoutstore.getOutQuantity()==0)return false;
         supplyoutstore.setOutTime(new Date());
         supplyoutstore.setId(new UniqueID().getTheUniqueId());
-
         return supplyoutstoreService.save(supplyoutstore);
     }
     @GetMapping("/getall")
     public List<Supplyoutstore> getall(){
-        return supplyoutstoreService.list();
+
+        return supplyoutstoreService.getlistByOrder();
     }
     @GetMapping("/outsum")
     public Integer getOutSum(){

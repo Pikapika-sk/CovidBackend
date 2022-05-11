@@ -3,10 +3,10 @@ package com.example.covidbackend.controller;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.covidbackend.entity.Supplyinstore;
 import com.example.covidbackend.entity.Supplystock;
 import com.example.covidbackend.service.SupplystockService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,7 @@ public class SupplystockController {
 
     @GetMapping
     public List<Supplystock> get() {
-        List<Supplystock> supplystocks = supplystockService.list();
-        return supplystocks;
+        return supplystockService.getListByOrder();
     }
 
     @PostMapping("/instore")
@@ -51,8 +50,13 @@ public class SupplystockController {
     public boolean outFromStroe(@RequestBody Supplystock supplystock) {
         return supplystockService.updateById(supplystock);
     }
+    @DeleteMapping("/del/{id}")
+    public boolean delStock(@PathVariable String id){
+        return supplystockService.removeById(id);
+    }
     @GetMapping("/getsum")
     public Integer getSum(){
         return supplystockService.getsum();
     }
+    
 }

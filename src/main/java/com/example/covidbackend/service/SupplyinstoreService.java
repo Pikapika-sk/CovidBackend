@@ -70,4 +70,10 @@ public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Suppl
         }
         return list;
     }
+
+    public List<Supplyinstore> getListByOrder() {
+        QueryWrapper<Supplyinstore>wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc(("in_store_time"));
+        return getBaseMapper().selectList(wrapper);
+    }
 }

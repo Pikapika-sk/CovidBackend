@@ -15,7 +15,7 @@ public class SupplyinstoreController {
 
     @Autowired
     private SupplyinstoreService supplyService;
-
+//  物资入库
     @PostMapping("/register")
     public boolean register(@RequestBody Supplyinstore supplyInStore) {
         String tmp = new UniqueID().getTheUniqueId();
@@ -26,11 +26,11 @@ public class SupplyinstoreController {
 
         return supplyService.save(supplyInStore);
     }
-
+//  入库信息
     @GetMapping
     public List<Supplyinstore> getAll() {
-        List<Supplyinstore> supplyinstores = supplyService.list();
-        return supplyinstores;
+        return supplyService.getListByOrder();
+
     }
 
     @DeleteMapping("{id}")

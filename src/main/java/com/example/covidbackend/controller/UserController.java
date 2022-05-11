@@ -35,7 +35,10 @@ public class UserController {
     public boolean isadmin(@RequestBody User user){
         return userService.judgeIsAdmin(user);
     }
-
+    @PostMapping("/changeAdmin")
+    public boolean changeAdminState(@RequestBody String phoneNumber){
+        return userService.changeState(phoneNumber);
+    }
     @GetMapping
     public List<User> get() {
         List<User> user = userService.list();

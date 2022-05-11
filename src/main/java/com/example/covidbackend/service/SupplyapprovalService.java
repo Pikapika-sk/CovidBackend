@@ -36,7 +36,14 @@ public class SupplyapprovalService extends ServiceImpl<SupplyapprovalMapper, Sup
     public List<Supplyapproval> getstate3() {
         QueryWrapper<Supplyapproval>wrapper = new QueryWrapper<>();
         wrapper.eq("state",3);
+        wrapper.orderByAsc("out_state").orderByDesc("weight").orderByAsc("create_time");
         List<Supplyapproval>supplyapprovals = supplyapprovalMapper.selectList(wrapper);
         return supplyapprovals;
+    }
+
+    public List<Supplyapproval> getAllByOrder() {
+        QueryWrapper<Supplyapproval> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("state").orderByDesc("weight").orderByDesc("create_time");
+        return getBaseMapper().selectList(wrapper);
     }
 }

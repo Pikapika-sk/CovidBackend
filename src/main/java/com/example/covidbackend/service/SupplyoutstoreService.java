@@ -58,4 +58,10 @@ public class SupplyoutstoreService extends ServiceImpl<SupplyoutstoreMapper, Sup
         int tmp = sum.intValue();
         return Integer.toString(tmp);
     }
+
+    public List<Supplyoutstore> getlistByOrder() {
+        QueryWrapper<Supplyoutstore> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        return getBaseMapper().selectList(wrapper);
+    }
 }

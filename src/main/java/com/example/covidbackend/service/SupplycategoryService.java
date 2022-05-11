@@ -48,4 +48,10 @@ public class SupplycategoryService extends ServiceImpl<SupplycategoryMapper, Sup
         }
         return ans;
     }
+
+    public List<Supplycategory> getByAllByTime() {
+        QueryWrapper<Supplycategory>wrapper= new QueryWrapper<>();
+        wrapper.orderByDesc("create_time");
+        return getBaseMapper().selectList(wrapper);
+    }
 }
