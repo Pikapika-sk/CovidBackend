@@ -1,0 +1,15 @@
+package com.example.covidbackend.entity;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Polygon {
+    private Integer id;
+    private String lng;
+    private String lat;
+}
