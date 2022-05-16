@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/supplyCategory")
@@ -32,6 +33,11 @@ public class SupplycategoryController {
     public List<String> getcateogry() {      //select中的category数据
         List<String> supplycategories = supplycategoryService.getcategory();
         return supplycategories;
+    }
+
+    @GetMapping("/piechart/name")
+    public Map<String,Double> getPiechart(){
+        return supplycategoryService.getTencateogry();
     }
 
 }
