@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class MarkerService extends ServiceImpl<MarkerMapper,Marker > {
+public class MarkerService extends ServiceImpl<MarkerMapper, Marker> {
 
     @Autowired
     private UserMapper userMapper;
@@ -24,32 +24,39 @@ public class MarkerService extends ServiceImpl<MarkerMapper,Marker > {
     private SupplyapprovalMapper supplyapprovalMapper;
 
     public List<MarkerDTO> getNeedMarker() {
+        /*
+        1.获取所有申请中的电话号码
+        2.set存储电话号码
+        3.通过电话号码查询address
+        4.通过地址查询对应marker并返回
+         */
         QueryWrapper<Supplyapproval> supplyapprovalQueryWrapper = new QueryWrapper<>();
-        supplyapprovalQueryWrapper.select("phone_number");;
+        supplyapprovalQueryWrapper.select("phone_number");
+        ;
         List<Object> approvals = supplyapprovalMapper.selectObjs(supplyapprovalQueryWrapper);
         Set<String> phoneNumbers = new HashSet<>();
-        for(Object approval :approvals){
+        for (Object approval : approvals) {
             phoneNumbers.add(approval.toString());
         }
-        Map<String,String> AddressToPhone = new HashMap<>();
-        List<String> needAddress  = new ArrayList<>();
+        Map<String, String> AddressToPhone = new HashMap<>();
+        List<String> needAddress = new ArrayList<>();
         QueryWrapper<User> wrapper = new QueryWrapper<>();
-       for(String oneNumber:phoneNumbers){
-           wrapper.eq("phone_number",oneNumber);
-           User user = userMapper.selectById(oneNumber);
-           needAddress.add(user.getAddress());
-           AddressToPhone.put(user.getAddress(),oneNumber);
-       }
-       List<MarkerDTO>markers= new ArrayList<>();
-       for(String add:needAddress){
-           Marker marker  = getBaseMapper().selectById(add);
-           MarkerDTO markerDTO = new MarkerDTO();
-           markerDTO.setAddress((marker.getAddress()));
-           markerDTO.setLat(marker.getLat());
-           markerDTO.setLng(marker.getLng());
-           markerDTO.setPhoneNumber(AddressToPhone.get(add));
-           markers.add(markerDTO);
-       }
+        for (String oneNumber : phoneNumbers) {
+            wrapper.eq("phone_number", oneNumber);
+            User user = userMapper.selectById(oneNumber);
+            needAddress.add(user.getAddress());
+            AddressToPhone.put(user.getAddress(), oneNumber);
+        }
+        List<MarkerDTO> markers = new ArrayList<>();
+        for (String add : needAddress) {
+            Marker marker = getBaseMapper().selectById(add);
+            MarkerDTO markerDTO = new MarkerDTO();
+            markerDTO.setAddress((marker.getAddress()));
+            markerDTO.setLat(marker.getLat());
+            markerDTO.setLng(marker.getLng());
+            markerDTO.setPhoneNumber(AddressToPhone.get(add));
+            markers.add(markerDTO);
+        }
         return markers;
     }
 }

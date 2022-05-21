@@ -15,7 +15,8 @@ public class SupplyinstoreController {
 
     @Autowired
     private SupplyinstoreService supplyService;
-//  物资入库
+
+    //  物资入库
     @PostMapping("/register")
     public boolean register(@RequestBody Supplyinstore supplyInStore) {
         String tmp = new UniqueID().getTheUniqueId();
@@ -23,31 +24,30 @@ public class SupplyinstoreController {
             return false;
         if (supplyInStore.getNote() == "") supplyInStore.setNote("无");
         supplyInStore.setId(tmp);
-
         return supplyService.save(supplyInStore);
     }
-//  入库信息
+
+    //  获取所有入库信息
     @GetMapping
     public List<Supplyinstore> getAll() {
         return supplyService.getListByOrder();
-
     }
 
+    //删除入库信息
     @DeleteMapping("{id}")
     public boolean remove(@PathVariable String id) {
         return supplyService.removeById(id);
     }
 
-    @GetMapping ("/getPurpledata")
-    public List<Long> getPurpleData(){
-        return supplyService.getPurpledata();
-    }
-    @GetMapping ("/getBluedata")
-    public List<Long> getBlueData(){
+    //获取近7天入库数
+    @GetMapping("/getBluedata")
+    public List<Long> getBlueData() {
         return supplyService.getBluedata();
     }
-    @GetMapping ("/getSevenDaySum")
-    public String getSevenDaySum(){
+
+    //近7天入库总数
+    @GetMapping("/getSevenDaySum")
+    public String getSevenDaySum() {
         return supplyService.getSevenDaySum();
     }
 

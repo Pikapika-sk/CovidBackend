@@ -17,11 +17,12 @@ public class UserhelpService extends ServiceImpl<UserhelpMapper, Userhelp> {
 
     @Autowired
     private UserService userService;
+
     public boolean saveTheHelp(Userhelp userhelp) {
         userhelp.setId(new UniqueID().getTheUniqueId());
         userhelp.setState(false);
         userhelp.setCreateTime(new Date());
-        User  user = userService.getById(userhelp.getPhoneNumber());
+        User user = userService.getById(userhelp.getPhoneNumber());
         userhelp.setAddress(user.getAddress());
         return save(userhelp);
     }
@@ -34,7 +35,7 @@ public class UserhelpService extends ServiceImpl<UserhelpMapper, Userhelp> {
 
     public boolean changeState(String id) {
         Userhelp userhelp = getById(id);
-       userhelp.setState(!userhelp.getState());
+        userhelp.setState(!userhelp.getState());
         return saveOrUpdate(userhelp);
     }
 }

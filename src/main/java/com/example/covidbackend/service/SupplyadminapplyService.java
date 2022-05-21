@@ -14,7 +14,7 @@ import java.util.List;
 public class SupplyadminapplyService extends ServiceImpl<SupplyadminapplyMapper, Supplyadminapply> {
 
     public boolean saveTheApply(Supplyadminapply supplyadminapply) {
-        Supplyadminapply saveapply= new Supplyadminapply();
+        Supplyadminapply saveapply = new Supplyadminapply();
         saveapply.setAddress(supplyadminapply.getAddress());
         saveapply.setCategoryname(supplyadminapply.getCategoryname());
         saveapply.setNote(supplyadminapply.getNote());

@@ -14,26 +14,25 @@ import java.util.List;
 public class SupplystockService extends ServiceImpl<SupplystockMapper, Supplystock> {
 
 
-
-    public  List<Supplystock> getListByOrder() {
-        QueryWrapper<Supplystock>wrapper  = new QueryWrapper<>();
+    public List<Supplystock> getListByOrder() {
+        QueryWrapper<Supplystock> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("id");
         return getBaseMapper().selectList(wrapper);
     }
 
     public List<Supplystock> getofCategory(String categoryname) {
 
-        QueryWrapper<Supplystock>wrapper = new QueryWrapper<>();
-        wrapper.eq("categoryname",categoryname);
-        wrapper.ne("remain_quantity",0);
-        return  getBaseMapper().selectList(wrapper);
+        QueryWrapper<Supplystock> wrapper = new QueryWrapper<>();
+        wrapper.eq("categoryname", categoryname);
+        wrapper.ne("remain_quantity", 0);
+        return getBaseMapper().selectList(wrapper);
 
     }
 
     public Integer getsum() {
-        List<Supplystock> lists =  list();
+        List<Supplystock> lists = list();
         int sum = 0;
-        for( Supplystock supplystock :lists){
+        for (Supplystock supplystock : lists) {
             sum += supplystock.getRemainQuantity();
         }
         return sum;

@@ -15,18 +15,21 @@ public class PolygonController {
     @Autowired
     private PolygonService polygonService;
 
+    //获取多边形所有坐标点
     @GetMapping("/getAll")
-    public List<Polygon> getPolygon(){
+    public List<Polygon> getPolygon() {
         return polygonService.list();
     }
 
+    //存储坐标点
     @PostMapping("/update")
-    public Boolean updatePolygon(@RequestBody List<Polygon>polygonList){
+    public Boolean updatePolygon(@RequestBody List<Polygon> polygonList) {
         return polygonService.saveBatch(polygonList);
     }
 
+    //删除原坐标点
     @PostMapping("/delete")
-    public boolean DeletePolygon(@RequestBody List<Polygon>polygonList){
+    public boolean DeletePolygon(@RequestBody List<Polygon> polygonList) {
         return polygonService.removeBatchByIds(polygonList);
     }
 

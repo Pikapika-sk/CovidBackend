@@ -17,28 +17,36 @@ public class SupplyoutstoreController {
     @Autowired
     private SupplyoutstoreService supplyoutstoreService;
 
+    //出库信息存储
     @PostMapping("/save")
     public boolean saveOfOutStore(@RequestBody Supplyoutstore supplyoutstore) {
-        if(supplyoutstore.getOutQuantity()==0)return false;
+        if (supplyoutstore.getOutQuantity() == 0) return false;
         supplyoutstore.setOutTime(new Date());
         supplyoutstore.setId(new UniqueID().getTheUniqueId());
         return supplyoutstoreService.save(supplyoutstore);
     }
-    @GetMapping("/getall")
-    public List<Supplyoutstore> getall(){
 
+    //获取所有出库列表
+    @GetMapping("/getall")
+    public List<Supplyoutstore> getall() {
         return supplyoutstoreService.getlistByOrder();
     }
+
+    //出库总数-（未使用）
     @GetMapping("/outsum")
-    public Integer getOutSum(){
+    public Integer getOutSum() {
         return supplyoutstoreService.getOutSum();
     }
-    @GetMapping ("/getPurpledata")
-    public List<Long> getPurpleData(){
+
+    //近7天每一天的出库数量
+    @GetMapping("/getPurpledata")
+    public List<Long> getPurpleData() {
         return supplyoutstoreService.getPurpledata();
     }
-    @GetMapping ("/getSevenDaySum")
-    public String getSevenDaySum(){
+
+    //近7天出库总数
+    @GetMapping("/getSevenDaySum")
+    public String getSevenDaySum() {
         return supplyoutstoreService.getSevenDaySum();
     }
 }

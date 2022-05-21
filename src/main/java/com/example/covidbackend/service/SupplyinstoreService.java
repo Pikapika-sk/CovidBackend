@@ -21,20 +21,6 @@ import java.util.List;
 public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Supplyinstore> {
 
 
-    public List<Long> getPurpledata() {
-        Date tmptoday = new Date();
-        Date today = DateUtil.parse(tmptoday.toString());
-        List<Long> list = new ArrayList<>();
-        for (int i = 0; i > -7; i--) {
-            QueryWrapper<Supplyinstore> wrapper = new QueryWrapper<>();
-            Date nowday = DateUtil.beginOfDay(DateUtil.offsetDay(today, i));
-            wrapper.lt("in_store_time", DateUtil.endOfDay(nowday));
-            wrapper.ge("in_store_time", DateUtil.beginOfDay(nowday));
-            list.add(getBaseMapper().selectCount(wrapper));
-        }
-        return list;
-    }
-
     public String getSevenDaySum() {
         Date tmptoday = new Date();
         Date today = DateUtil.parse(tmptoday.toString());
@@ -47,7 +33,7 @@ public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Suppl
         for (Supplyinstore supplyinstore : supplyinstores) {
             sum += supplyinstore.getQuantity();
         }
-       int tmp = sum.intValue();
+        int tmp = sum.intValue();
         return Integer.toString(tmp);
 
     }
@@ -63,7 +49,7 @@ public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Suppl
             wrapper.ge("in_store_time", DateUtil.beginOfDay(nowday));
             List<Supplyinstore> supplyinstores = getBaseMapper().selectList(wrapper);
             long sum = 0;
-            for(Supplyinstore supplyinstore :supplyinstores){
+            for (Supplyinstore supplyinstore : supplyinstores) {
                 sum += supplyinstore.getQuantity().longValue();
             }
             list.add(sum);
@@ -72,7 +58,7 @@ public class SupplyinstoreService extends ServiceImpl<SupplyinstoreMapper, Suppl
     }
 
     public List<Supplyinstore> getListByOrder() {
-        QueryWrapper<Supplyinstore>wrapper = new QueryWrapper<>();
+        QueryWrapper<Supplyinstore> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc(("in_store_time"));
         return getBaseMapper().selectList(wrapper);
     }

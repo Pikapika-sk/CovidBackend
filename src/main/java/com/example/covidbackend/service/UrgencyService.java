@@ -29,7 +29,7 @@ public class UrgencyService extends ServiceImpl<UrgencyMapper, Urgency> {
 
     public Integer getTheSum() {
         QueryWrapper<Urgency> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("state",0);
+        queryWrapper.eq("state", 0);
         List<Urgency> urgencies = getBaseMapper().selectList(queryWrapper);
         return urgencies.size();
 
@@ -37,8 +37,8 @@ public class UrgencyService extends ServiceImpl<UrgencyMapper, Urgency> {
 
     public List<Urgency> getalllno() {
         QueryWrapper<Urgency> wrapper = new QueryWrapper<>();
-        wrapper.eq("state",0);
-        List<Urgency> urgencies = getBaseMapper().selectList(wrapper );
+        wrapper.eq("state", 0);
+        List<Urgency> urgencies = getBaseMapper().selectList(wrapper);
         return urgencies;
     }
 }

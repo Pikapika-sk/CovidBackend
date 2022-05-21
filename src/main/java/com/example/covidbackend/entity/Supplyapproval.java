@@ -1,5 +1,6 @@
 package com.example.covidbackend.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class Supplyapproval {
     private Date createTime;
     private Boolean outState;
     private Double needQuantity;
+
 }

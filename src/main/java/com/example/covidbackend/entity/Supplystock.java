@@ -1,5 +1,6 @@
 package com.example.covidbackend.entity;
 
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

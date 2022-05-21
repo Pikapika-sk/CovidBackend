@@ -21,6 +21,7 @@ public class SupplycategoryService extends ServiceImpl<SupplycategoryMapper, Sup
     private SupplycategoryMapper supplycategoryMapper;
     @Autowired
     private SupplyapprovalService supplyapprovalService;
+
     public boolean register(Supplycategory supplycategory) {
         QueryWrapper<Supplycategory> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("categoryname", supplycategory.getCategoryname());
@@ -50,18 +51,42 @@ public class SupplycategoryService extends ServiceImpl<SupplycategoryMapper, Sup
     }
 
     public List<Supplycategory> getByAllByTime() {
-        QueryWrapper<Supplycategory>wrapper= new QueryWrapper<>();
+        QueryWrapper<Supplycategory> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("create_time");
         return getBaseMapper().selectList(wrapper);
     }
 
-    public Map<String,Double> getTencateogry() {
-        Map<String,Double> categorymap= new TreeMap<>();
+    public List<String> getTencateogry() {
+
+        Map<String, Double> categorymap = new HashMap<>();
         List<Supplyapproval> supplyapprovalList = supplyapprovalService.list();
-        for(Supplyapproval supplyapproval :supplyapprovalList){
-          categorymap.put(supplyapproval.getCategoryname(),supplyapproval.getQuantity());
+        for (Supplyapproval supplyapproval : supplyapprovalList) {
+            categorymap.put(supplyapproval.getCategoryname(), supplyapproval.getQuantity());
+        }
+        List<Map.Entry<String, Double>> infoIds = new ArrayList<>(categorymap.entrySet());
+        infoIds.sort((o1, o2) -> (int) (o2.getValue() - o1.getValue()));
+        List<String> tenCategory = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            tenCategory.add(infoIds.get(i).getKey());
+
         }
 
-        return categorymap;
+        return tenCategory;
+    }
+
+    public List<Double> getTenNum() {
+        Map<String, Double> categorymap = new HashMap<>();
+        List<Supplyapproval> supplyapprovalList = supplyapprovalService.list();
+        for (Supplyapproval supplyapproval : supplyapprovalList) {
+            categorymap.put(supplyapproval.getCategoryname(), supplyapproval.getQuantity());
+        }
+        List<Map.Entry<String, Double>> infoIds = new ArrayList<>(categorymap.entrySet());
+        infoIds.sort((o1, o2) -> (int) (o2.getValue() - o1.getValue()));
+        List<Double> num = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            num.add(infoIds.get(i).getValue());
+
+        }
+        return num;
     }
 }

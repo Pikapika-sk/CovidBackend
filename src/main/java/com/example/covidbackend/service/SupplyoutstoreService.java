@@ -15,9 +15,9 @@ import java.util.List;
 @Service
 public class SupplyoutstoreService extends ServiceImpl<SupplyoutstoreMapper, Supplyoutstore> {
     public Integer getOutSum() {
-        int sum = 0 ;
+        int sum = 0;
         List<Supplyoutstore> supplyoutstoreList = list();
-        for( Supplyoutstore supplyoutstore : supplyoutstoreList){
+        for (Supplyoutstore supplyoutstore : supplyoutstoreList) {
             sum += supplyoutstore.getOutQuantity();
         }
         return sum;
@@ -33,8 +33,8 @@ public class SupplyoutstoreService extends ServiceImpl<SupplyoutstoreMapper, Sup
             wrapper.lt("out_time", DateUtil.endOfDay(nowday));
             wrapper.ge("out_time", DateUtil.beginOfDay(nowday));
             List<Supplyoutstore> supplyoutstoreList = getBaseMapper().selectList(wrapper);
-            long sum = 0 ;
-            for(Supplyoutstore supplyoutstore :supplyoutstoreList){
+            long sum = 0;
+            for (Supplyoutstore supplyoutstore : supplyoutstoreList) {
                 sum += supplyoutstore.getOutQuantity();
             }
             list.add(sum);

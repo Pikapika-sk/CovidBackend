@@ -25,6 +25,7 @@ public class SupplystockController {
         return supplystockService.getListByOrder();
     }
 
+    //新增库存信息
     @PostMapping("/instore")
     public boolean fromInStore(@RequestBody Supplyinstore supplyinstore) {
         Supplystock supplystock = new Supplystock();
@@ -37,26 +38,32 @@ public class SupplystockController {
         String randomString = RandomUtil.randomNumbers(8);
         String tmp = date + randomString;
         supplystock.setId(tmp);
-        if(supplystock.getNote()==null||supplystock.getNote()=="") supplystock.setNote("无");
+        if (supplystock.getNote() == null || supplystock.getNote() == "") supplystock.setNote("无");
         return supplystockService.save(supplystock);
     }
 
+    //获取特定类型物资库存情况
     @GetMapping("/{categoryname}")
     public List<Supplystock> getSupply(@PathVariable String categoryname) {
         return supplystockService.getofCategory(categoryname);
     }
 
+    //更新库存情况
     @PostMapping("/outStore")
     public boolean outFromStroe(@RequestBody Supplystock supplystock) {
         return supplystockService.updateById(supplystock);
     }
+
+    //删除库存信息
     @DeleteMapping("/del/{id}")
-    public boolean delStock(@PathVariable String id){
+    public boolean delStock(@PathVariable String id) {
         return supplystockService.removeById(id);
     }
+
+    //获取所有库存总数（未使用）
     @GetMapping("/getsum")
-    public Integer getSum(){
+    public Integer getSum() {
         return supplystockService.getsum();
     }
-    
+
 }

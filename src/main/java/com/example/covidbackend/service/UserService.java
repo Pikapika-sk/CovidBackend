@@ -9,7 +9,6 @@ import com.example.covidbackend.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
 
@@ -17,11 +16,12 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
         return saveOrUpdate(user);
     }
-    public boolean addNewUser(User user){
-        QueryWrapper<User> queryWrapper= new QueryWrapper<>();
-        queryWrapper.eq("phone_number",user.getPhoneNumber());
-        User one  = getOne(queryWrapper);
-        if(one !=null)return false;
+
+    public boolean addNewUser(User user) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone_number", user.getPhoneNumber());
+        User one = getOne(queryWrapper);
+        if (one != null) return false;
         else return save(user);
     }
 
@@ -57,27 +57,27 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     public User getTheSetUser(String phoneNumber) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone_number",phoneNumber);
+        queryWrapper.eq("phone_number", phoneNumber);
         User one = getOne(queryWrapper);
         return one;
     }
 
     public User getAddress(String phoneNumber) {
-        QueryWrapper<User>queryWrapper =new QueryWrapper<>();
-        queryWrapper.eq("phone_number",phoneNumber);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone_number", phoneNumber);
         User one = getOne(queryWrapper);
         return one;
     }
 
     public boolean judgeIsAdmin(User user) {
-        QueryWrapper<User>  wrapper= new QueryWrapper<>();
-        wrapper.eq("phone_number",user.getPhoneNumber());
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("phone_number", user.getPhoneNumber());
         User one = getOne(wrapper);
         return one.getIsadmin();
     }
 
     public boolean changeState(String phoneNumber) {
-        User user  = getById(phoneNumber);
+        User user = getById(phoneNumber);
         user.setIsadmin(!user.getIsadmin());
         return updateById(user);
     }

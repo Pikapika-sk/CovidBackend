@@ -18,26 +18,27 @@ public class SupplyapprovalService extends ServiceImpl<SupplyapprovalMapper, Sup
 
     @Autowired
     private SupplyapprovalMapper supplyapprovalMapper;
+
     public List<Supplyapproval> getself(String phoneNumber) {
-        QueryWrapper<Supplyapproval>wrapper = new QueryWrapper<>();
-        wrapper.eq("phone_number",phoneNumber);
+        QueryWrapper<Supplyapproval> wrapper = new QueryWrapper<>();
+        wrapper.eq("phone_number", phoneNumber).orderByDesc("create_time");
         List<Supplyapproval> supplyapprovals = supplyapprovalMapper.selectList(wrapper);
         return supplyapprovals;
     }
 
     public String getunFinishedSum() {
-        QueryWrapper<Supplyapproval>wrapper =new QueryWrapper<>();
-        wrapper.eq("state",1);
-        List<Supplyapproval>supplyapprovals = supplyapprovalMapper.selectList(wrapper);
+        QueryWrapper<Supplyapproval> wrapper = new QueryWrapper<>();
+        wrapper.eq("state", 1);
+        List<Supplyapproval> supplyapprovals = supplyapprovalMapper.selectList(wrapper);
         Integer sum = supplyapprovals.size();
         return sum.toString();
     }
 
     public List<Supplyapproval> getstate3() {
-        QueryWrapper<Supplyapproval>wrapper = new QueryWrapper<>();
-        wrapper.eq("state",3);
+        QueryWrapper<Supplyapproval> wrapper = new QueryWrapper<>();
+        wrapper.eq("state", 3);
         wrapper.orderByAsc("out_state").orderByDesc("weight").orderByAsc("create_time");
-        List<Supplyapproval>supplyapprovals = supplyapprovalMapper.selectList(wrapper);
+        List<Supplyapproval> supplyapprovals = supplyapprovalMapper.selectList(wrapper);
         return supplyapprovals;
     }
 
